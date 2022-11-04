@@ -1,0 +1,31 @@
+{
+    "name": "thoughtco/statamic-blurhash",
+    "description": "A Statamic add-on to generate and decode blurhash images",
+    "autoload": {
+        "psr-4": {
+            "Thoughtco\\BlurHash\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ryan Mitchell"
+        }
+    ],
+    "support": {
+        "email": "help@thoughtcollective.com"
+    },
+    "extra": {
+        "statamic": {
+            "name": "BlurHash",
+            "description": "Generate and decode blurhash images from Statamic assets"
+        },
+        "laravel": {
+            "providers": [
+                "Thoughtco\\BlurHash\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "bepsvpt/blurhash": "^2.0.0"
+    }
+}
