@@ -55,8 +55,11 @@ class BlurHash extends Tags
     public function index()
     {
         $image = $this->params->get('image');
-        
-        return '<img src="'.$this->decode($this->encode($image)).'" '.$this->renderAttributesFromParams(['image']).' />';
+                
+        return view('statamic-blurhash::output', [
+            'src' => $this->decode($this->encode($image)),
+            'params' => $this->renderAttributesFromParams(['image']),
+        ]);        
     } 
 
     /**

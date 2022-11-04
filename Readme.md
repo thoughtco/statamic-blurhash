@@ -40,6 +40,14 @@ will output as:
 
 `<img src="data:image/png;base64,iVBOR…8f8luO3RPLKe4AAAAAElFTkSuQmCC" width="640" height="640" onload="console.log('loaded')" />`
 
+If you want to override the output, you can publish the view to your own views folder by running:
+
+```
+php artisan vendor:publish --tag="statamic-blurhash"
+```
+
+it will then be found at `resources/views/vendor/statamic-blurhash/output.blade.php`
+
 
 ### Encoding a BlurHash image
 
