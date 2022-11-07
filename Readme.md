@@ -1,9 +1,12 @@
+<!-- statamic:hide -->
 
 ![Screenshot](./screenshot.png)
 
 ## Blur Hash
 
-An add-on for Statamic that encodes, decodes and generates [Blur Hash](https://github.com/woltapp/blurhash) images to use as placeholders during image loading.
+<!-- /statamic:hide -->
+
+> An add-on for Statamic that encodes, decodes and generates [Blur Hash](https://github.com/woltapp/blurhash) images to use as placeholders during image loading.
 
 ## Installation
 
