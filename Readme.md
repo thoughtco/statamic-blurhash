@@ -10,7 +10,7 @@
 
 ## Installation
 
-First, require BlueHash as a Composer dependency:
+First, require BlurHash as a Composer dependency:
 
 ```
 composer require thoughtco/statamic-blurhash
