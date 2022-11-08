@@ -10,6 +10,8 @@ use Statamic\Tags\Tags;
 class BlurHash extends Tags
 {
     use RendersAttributes;
+    
+    private $dimensions = false;
 
     /**
      * The {{ blur_hash:encode }} tag.
@@ -21,6 +23,8 @@ class BlurHash extends Tags
         $image = $this->params->get('image');
         
         if ($image instanceof AssetContract) {
+            $this->dimensions = $image->dimensions();
+            
             $image = $image->contents();
         }
                                 
@@ -55,9 +59,26 @@ class BlurHash extends Tags
     public function index()
     {
         $image = $this->params->get('image');
+        
+        $hash = $this->encode($image);
+        
+        if ($this->dimensions) {
+            
+            $width = $this->params->get('width', 0);
+            $height = $this->params->get('height', 0);
+            
+            // if we have width but not height, we work out the height proportionally
+            if ($width && ! $height) {
+                $this->params->put('height', $width * $this->dimensions[1]/$this->dimensions[0]);
+                
+            // if we have height but not width, we work out the width proportionally
+            } else if ($height && ! $width) {
+                $this->params->put('width', $height * $this->dimensions[0]/$this->dimensions[1]);
+            }
+        }
                 
         return view('statamic-blurhash::output', [
-            'src' => $this->decode($this->encode($image)),
+            'src' => $this->decode($hash),
             'params' => $this->renderAttributesFromParams(['image']),
         ]);        
     } 
