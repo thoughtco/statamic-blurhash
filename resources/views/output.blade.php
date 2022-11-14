@@ -1,1 +1,1 @@
-<img src="{{ $src }}" {!! $params !!} />
+<img src="{{ $src }}" {!! $render_params !!} />

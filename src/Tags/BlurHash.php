@@ -79,7 +79,8 @@ class BlurHash extends Tags
                 
         return view('statamic-blurhash::output', [
             'src' => $this->decode($hash),
-            'params' => $this->renderAttributesFromParams(['image']),
+            'params' => $this->params,
+            'render_params' => $this->renderAttributesFromParams(['image']),
         ]);        
     } 
 
