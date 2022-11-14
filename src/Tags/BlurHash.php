@@ -90,7 +90,7 @@ class BlurHash extends Tags
      */    
     public function wildcard($tag)
     {
-        $this->params->put('image', $tag);
+        $this->params->put('image', $this->context->value($tag));
         
         return $this->index();
     }   
