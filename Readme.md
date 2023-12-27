@@ -29,7 +29,23 @@ This add-on provides a number of tags:
 
 ### Outputting a BlurHash image
 
- `{{ blur_hash:image }}` or `{{ blur_hash image="path_or_asset" }}`
+ `{{ blur_hash:image }}` 
+
+or 
+
+`{{ blur_hash :image="asset" }}` 
+
+or 
+
+`{{ blur_hash :url="url" }}` 
+
+or
+
+`{{ blur_hash :id="asset_id" }}`
+
+or 
+
+`{{ blur_hash :path="local_path" }}`
 
 This tag will output an encoded image in the following format:
 
@@ -55,6 +71,18 @@ it will then be found at `resources/views/vendor/statamic-blurhash/output.blade.
 ### Encoding a BlurHash image
 
 `{{ blur_hash:encode image="path_or_asset" }}`
+
+or
+
+`{{ blur_hash:encode :url="url" }}`
+
+or
+
+`{{ blur_hash:encode :id="asset_id" }}`
+
+or
+
+`{{ blur_hash:encode :path="path" }}`
 
 This will return a BlurHash encoded URL, useful if you want to return this to JavaScript or a 3rd party service (such as Algolia).
 
