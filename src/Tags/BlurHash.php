@@ -19,8 +19,10 @@ class BlurHash extends Tags
      *
      * @return string|array
      */
-    public function encode($image)
+    public function encode()
     {
+        $image = $this->getImageFromParams();
+        
         if ($image instanceof AssetContract) {
             $this->dimensions = $image->dimensions();
 
@@ -57,21 +59,7 @@ class BlurHash extends Tags
      */
     public function index()
     {
-        $image = $this->params->get('image');
-
-        if ($id = $this->params->get('id')) {
-            $image = Asset::findById($id);
-        }
-
-        if ($path = $this->params->get('path')) {
-            $image = Asset::findByPath($path);
-        }
-
-        if ($url = $this->params->get('url')) {
-            $image = Asset::findByUrl($url);
-        }
-
-        $hash = $this->encode($image);
+        $hash = $this->encode();
 
         if ($this->dimensions) {
             $width = $this->params->get('width', 0);
@@ -104,5 +92,34 @@ class BlurHash extends Tags
         $this->params->put('image', $this->context->value($tag));
 
         return $this->index();
+    }
+    
+    private function getImageFromParams()
+    {
+        if ($id = $this->params->get('id')) {
+            $image = Asset::findById($id);
+                
+            if ($image) {
+                return $image;
+            }
+        }
+
+        if ($path = $this->params->get('path')) {
+            $image = Asset::findByPath($path);
+                
+            if ($image) {
+                return $image;
+            }
+        }
+
+        if ($url = $this->params->get('url')) {
+            $image = Asset::findByUrl($url);
+                
+            if ($image) {
+                return $image;
+            }
+        }
+        
+        return $this->params->get('image');
     }
 }
