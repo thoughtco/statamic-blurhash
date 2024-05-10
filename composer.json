@@ -26,6 +26,6 @@
         }
     },
     "require": {
-        "bepsvpt/blurhash": "^2.0.0"
+        "bepsvpt/blurhash": "^3.0.0"
     }
 }
