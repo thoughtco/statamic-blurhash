@@ -26,6 +26,7 @@
         }
     },
     "require": {
-        "bepsvpt/blurhash": "^3.0.0"
+        "bepsvpt/blurhash": "^3.0.0",
+        "laravel/pint": "^1.16"
     }
 }
