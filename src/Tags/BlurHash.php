@@ -58,7 +58,6 @@ class BlurHash extends Tags
         ob_end_clean();
 
         return 'data:image/png;base64,'.base64_encode($image);
-        //return BlurHashFacade::encode($this->params->get('format', 'data-url'));
     }
 
     /**
