@@ -22,11 +22,11 @@ class BlurHash extends Tags
     public function encode()
     {
         $image = $this->getImageFromParams();
-        
+
         if ($image instanceof AssetContract) {
             $this->dimensions = $image->dimensions();
 
-            $image = $image->contents();
+            $image = $image->resolvedPath();
         }
 
         return BlurHashFacade::encode($image);
@@ -48,7 +48,16 @@ class BlurHash extends Tags
 
         $image = BlurHashFacade::decode($encodedString, $width, $height);
 
-        return $image->encode($this->params->get('format', 'data-url'));
+        if (! $image) {
+            return;
+        }
+
+        ob_start();
+        imagepng($image);
+        $image = ob_get_contents();
+        ob_end_clean();
+
+        return 'data:image/png;base64,'.base64_encode($image);
     }
 
     /**
@@ -69,7 +78,7 @@ class BlurHash extends Tags
             if ($width && ! $height) {
                 $this->params->put('height', $width * $this->dimensions[1] / $this->dimensions[0]);
 
-            // If we have height but not width, we work out the width proportionally
+                // If we have height but not width, we work out the width proportionally
             } elseif ($height && ! $width) {
                 $this->params->put('width', $height * $this->dimensions[0] / $this->dimensions[1]);
             }
@@ -93,12 +102,12 @@ class BlurHash extends Tags
 
         return $this->index();
     }
-    
+
     private function getImageFromParams()
     {
         if ($id = $this->params->get('id')) {
             $image = Asset::findById($id);
-                
+
             if ($image) {
                 return $image;
             }
@@ -106,7 +115,7 @@ class BlurHash extends Tags
 
         if ($path = $this->params->get('path')) {
             $image = Asset::findByPath($path);
-                
+
             if ($image) {
                 return $image;
             }
@@ -114,12 +123,12 @@ class BlurHash extends Tags
 
         if ($url = $this->params->get('url')) {
             $image = Asset::findByUrl($url);
-                
+
             if ($image) {
                 return $image;
             }
         }
-        
+
         return $this->params->get('image');
     }
 }

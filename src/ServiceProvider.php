@@ -9,7 +9,7 @@ class ServiceProvider extends AddonServiceProvider
     protected $tags = [
         Tags\BlurHash::class,
     ];
-    
+
     public function bootAddon()
     {
         $this->publishes([
